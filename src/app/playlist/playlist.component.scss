@@ -22,7 +22,7 @@
                 display: flex;
             }
         }
-        .mat-list-base {            
+        .mat-list-base {
             button {
                 color: $grey;
             }
@@ -35,7 +35,7 @@
                 display: none;
             }
         }
-        /deep/ .mat-list-text {
+        &::ng-deep .mat-list-text {
             h3 {
                 color: $primary-light;
                 text-align: left;
