@@ -61,10 +61,16 @@ jobs:
         with:
           name: bundle-report--hub-movies
           path: dist/hub-movies/stats.json
-      - name: Run lighthouse ci report
-        run: npm run lhci -- autorun
+
+      - name: Audit build using Lighthouse
+        uses: treosh/lighthouse-ci-action@v7
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        with:
+          configPath: './lighthouserc.js'
+          # budgetPath: ./budget.json # test performance budgets
+          uploadArtifacts: true # save results as an action artifacts
+          temporaryPublicStorage: true # upload lighthouse report to the temporary storage
 
       - name: Archive lighthouse ci artifacts
         uses: actions/upload-artifact@v2
@@ -79,13 +85,3 @@ jobs:
           head-branch-regex: '.+'
           body-template: "[PR LHCI report](https://???/${{ github.head_ref }}/.lighthouseci/report.html) | [Compare to master](https://???/.lighthouseci/report.html)"
           body-update-action: 'suffix'
-
-      - name: Audit URLs using Lighthouse
-        uses: treosh/lighthouse-ci-action@v7
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-        with:
-          configPath: './lighthouserc.js'
-          # budgetPath: ./budget.json # test performance budgets
-          uploadArtifacts: true # save results as an action artifacts
-          temporaryPublicStorage: true # upload lighthouse report to the temporary storage
