@@ -68,7 +68,7 @@ jobs:
       - name: Audit build using Lighthouse
         uses: treosh/lighthouse-ci-action@v7
         env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          # LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           LHCI_TOKEN: ${{ secrets.LHCI_TOKEN }}
         with:
           configPath: './lighthouserc.js'
