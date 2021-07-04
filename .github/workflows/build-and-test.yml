@@ -71,17 +71,11 @@ jobs:
           # budgetPath: ./budget.json # test performance budgets
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
-
-      - name: Archive lighthouse ci artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: lhci--hub-movies
-          path: |
-            .lighthouseci
+          { "links": ${{}}, "manifest": ${{steps.LHCIAction.outputs.manifest}} }
 
       - uses: tzkhan/pr-update-action@v2
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           head-branch-regex: '.+'
-          body-template: "[PR LHCI report](https://???/${{ github.head_ref }}/.lighthouseci/report.html) | [Compare to master](https://???/.lighthouseci/report.html)"
+          body-template: "[PR LHCI report](${{ steps.LHCIAction.outputs.links }}) | [Compare to master](https://???/.lighthouseci/report.html)"
           body-update-action: 'suffix'
