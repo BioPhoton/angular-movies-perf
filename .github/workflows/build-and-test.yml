@@ -74,8 +74,8 @@ jobs:
             .lighthouseci
 
       - uses: tzkhan/pr-update-action@v2
-          with:
-            repo-token: "${{ secrets.GITHUB_TOKEN }}"
-            head-branch-regex: '.+'
-            body-template: "[PR LHCI report](https://???/${{ github.head_ref }}/.lighthouseci/report.html) | [Compare to master](https://???/.lighthouseci/report.html)"
-            body-update-action: 'suffix'
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          head-branch-regex: '.+'
+          body-template: "[PR LHCI report](https://???/${{ github.head_ref }}/.lighthouseci/report.html) | [Compare to master](https://???/.lighthouseci/report.html)"
+          body-update-action: 'suffix'
