@@ -1,5 +1,15 @@
 name: Lighthouse CI
-on: push
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_run:
+    workflows: [ "Hub Movies - Build & Test" ]
+    types:
+      - completed
+
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
