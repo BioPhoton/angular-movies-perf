@@ -48,15 +48,17 @@ jobs:
 
       - name: Build Application
         run: npm run ng build -- --configuration production --stats-json
-        - name: Archive build artifacts
-          uses: actions/upload-artifact@v2
-          with:
-            name: dist--hub-movies
-            path: |
-              dist/hub-movies
-        - name: Archive bundle report results
-          uses: actions/upload-artifact@v2
-          with:
-            name: bundle-report--hub-movies
-            path: dist/hub-movies/stats.json
+
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist--hub-movies
+          path: |
+            dist/hub-movies
+
+      - name: Archive bundle-report artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: bundle-report--hub-movies
+          path: dist/hub-movies/stats.json
 
