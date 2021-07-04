@@ -42,11 +42,11 @@ jobs:
       - name: Archive build artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: dist
+          name: dist--hub-movies
           path: |
             dist
-      - name: Archive code coverage results
+      - name: Archive bundle report results
         uses: actions/upload-artifact@v2
         with:
-          name: code-coverage-report
-          path: dist/**/code-coverage.*
+          name: bundle-report--hub-movies
+          path: dist/hub-movies/stats.json
