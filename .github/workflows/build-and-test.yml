@@ -48,12 +48,13 @@ jobs:
     - run: npm run ng test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
 
     - name: Build Project
-      if: steps.npm-cache.outputs.cache-hit != 'true'
-    - uses: actions/cache@v2
-      id: build-cache
-      with:
-        path: |
-          dist
-        key: ${{ runner.os }}-build-${{ hashFiles('./dist/**/*') }}
-        restore-keys: ${{ runner.os }}-build
+      if: steps.build-cache.outputs.cache-hit != 'true'
+
     - run: npm run ng build -- --prod
+    - uses: actions/cache@v2
+       id: build-cache
+       with:
+         path: |
+           dist
+         key: ${{ runner.os }}-build-${{ hashFiles('./dist/**/*') }}
+         restore-keys: ${{ runner.os }}-build
