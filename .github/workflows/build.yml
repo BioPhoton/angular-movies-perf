@@ -38,7 +38,7 @@ jobs:
           key: ${{ runner.os }}-npm-${{ hashFiles('./package-lock.json') }}
           restore-keys: ${{ runner.os }}-npm
       - name: Build Application
-        run: npm run ng build -- --prod
+        run: npm run ng build -- --configuration production --stats-json
       - name: Archive build artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -49,4 +49,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: bundle-report--hub-movies
-          path: dist/hub-movies/stats.json*
+          path: dist/hub-movies/stats.json
