@@ -61,4 +61,15 @@ jobs:
         with:
           name: bundle-report--hub-movies
           path: dist/hub-movies/stats.json
+      - name: Run lighthouse ci report
+        run: npm run lhci -- autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      - name: Archive lighthouse ci artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: lhci--hub-movies
+          path: |
+            .lighthouseci
 
