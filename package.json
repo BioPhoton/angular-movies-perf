@@ -5,13 +5,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration production --stats-json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ngsw-config": "node_modules/.bin/ngsw-config dist ./src/ngsw-config.json",
     "serve:ngsw": "npm run ngsw-config && http-server dist -p 8080",
-    "bundle-report": "ng build --configuration production --stats-json && webpack-bundle-analyzer dist/hub-movies/stats.json"
+    "bundle-report": "npm build && webpack-bundle-analyzer dist/hub-movies/stats.json"
   },
   "private": true,
   "dependencies": {
