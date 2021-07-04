@@ -46,5 +46,5 @@ jobs:
       run: npm install
 
     - run: npm run ng lint
-    - run: npm run ng test -- --watch=false
+    - run: npm run ng test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
     - run: npm run ng build -- --prod
