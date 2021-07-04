@@ -39,7 +39,6 @@ jobs:
           key: ${{ runner.os }}-npm-${{ hashFiles('./package-lock.json') }}
           restore-keys: ${{ runner.os }}-npm
       - name: Build Application
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm run ng build -- --prod
       - name: Archive build artifacts
         uses: actions/upload-artifact@v2
