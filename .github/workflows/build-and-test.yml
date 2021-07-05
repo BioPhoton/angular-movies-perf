@@ -68,7 +68,7 @@ jobs:
           # LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           LHCI_TOKEN: ${{ secrets.LHCI_TOKEN }}
         with:
-          configPath: './lighthouserc.github.js'
+          configPath: './lighthouserc.js'
           # budgetPath: ./budget.json # test performance budgets
           uploadArtifacts: true # save results as an action artifacts
 
