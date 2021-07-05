@@ -76,5 +76,5 @@ jobs:
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           head-branch-regex: '.+'
-          body-template: "[PR LHCI report](${{ steps.LHCIAction.outputs.links }}) | [Compare to master](https://???/.lighthouseci/report.html)"
+          body-template: "[PR LHCI report](${{ steps.LHCIAction.outputs.links }}) | ${{ steps.LHCIAction.outputs.links }}"
           body-update-action: 'suffix'
