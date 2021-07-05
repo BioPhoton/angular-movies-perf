@@ -14,8 +14,9 @@
     "serve:ngsw": "npm run ngsw-config && http-server dist -p 8080",
     "bundle-report": "npm build && webpack-bundle-analyzer dist/hub-movies/stats.json",
     "lhci-server:start": "npm run lhci --  server --https --storage.storageMethod=sql --storage.sqlDialect=sqlite --storage.sqlDatabasePath=./.lighthouseci/db.sql",
-    "lhci-cli:autorun:local": "npm run lhci -- autorun --config=lighthouserc.local.js",
-    "lhci:collect" : "npx concurrently  \"npm:lhci-server:start\" \"npm:lhci-cli:autorun:local\""
+    "lhci-cli:autorun:local": "npm run lhci -- autorun --config=lighthouserc.local.js && npm run kill",
+    "lhci:collect": "npx concurrently \"npm:lhci-server:start\" \"npm:lhci-cli:autorun:local\"",
+    "kill": "node kill.js"
   },
   "private": true,
   "dependencies": {
@@ -52,6 +53,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "find-process": "^1.4.4",
     "http-server": "^0.11.1",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
@@ -63,6 +65,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
     "sqlite3": "^5.0.2",
+    "terminate": "^2.2.1",
     "ts-node": "~5.0.1",
     "tslint": "~6.1.0",
     "typescript": "4.3.5",
