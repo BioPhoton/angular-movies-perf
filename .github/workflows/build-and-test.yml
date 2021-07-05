@@ -101,10 +101,10 @@ jobs:
    #       uploadArtifacts: true # save results as an action artifacts
 
 
-    # TODO add link to report
-    #  - uses: tzkhan/pr-update-action@v2
-    #    with:
-    #      repo-token: "${{ secrets.GITHUB_TOKEN }}"
-    #      head-branch-regex: '.+'
-    #      body-template: "[PR LHCI report](${{ steps.LHCIAction.outputs.links }}) | ${{ steps.LHCIAction.outputs.links }}"
-    #      body-update-action: 'suffix'
+      - uses: tzkhan/pr-update-action@v2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          head-branch-regex: '.+'
+          # http://localhost:9001/app/projects/angular-movies-perf/compare/163c990e52fe
+          body-template: "[LHCI Server](http://localhost:9001/app/projects/${{ github.event.pull_request.head.repo.full_name }} }})"
+          body-update-action: 'suffix'
