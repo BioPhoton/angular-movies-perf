@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CategoriesDeleteModalComponent } from './categories-delete-modal.component';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';

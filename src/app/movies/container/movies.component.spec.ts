@@ -14,7 +14,7 @@ import { StorageService } from 'app/shared/service/storage/storage.service';
 import { TmdbService } from 'app/shared/service/tmdb/tmdb.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { Observable, of } from 'rxjs';
-import { MovieListComponent } from './movie-list/movie-list.component';
+import { MovieListComponent } from '../movie-list/movie-list.component';
 import { MoviesComponent } from './movies.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { PaginationComponent } from 'app/shared/component/pagination/pagination.component';
