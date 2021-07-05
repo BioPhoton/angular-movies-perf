@@ -15,10 +15,10 @@
     "serve:ngsw": "npm run ngsw-config && http-server dist -p 8080",
     "bundle-report": "npm build && webpack-bundle-analyzer dist/hub-movies/stats.json",
     "lhci-server:start": "npm run lhci --  server --https --storage.storageMethod=sql --storage.sqlDialect=sqlite --storage.sqlDatabasePath=./.lighthouseci/db.sql || true",
-    "lhci-cli:autorun:local": "npm run lhci -- autorun --config=lighthouserc.local.js && npm run kill",
-    "lhci-cli:autorun:ci": "npm run lhci -- autorun --config=lighthouserc.github.js && npm run kill",
-    "lhci:collect": "npm run concurrently \"npm:lhci-server:start\" \"npm:lhci-cli:autorun:local\"",
-    "kill": "node kill.js"
+    "lhci-server:stop": "node tooling/stop-lhci-server.js",
+    "lhci-cli:autorun:local": "npm run lhci -- autorun --config=lighthouserc.local.js && npm run lhci-server:stop",
+    "lhci-cli:autorun:ci": "npm run lhci -- autorun --config=lighthouserc.github.js && npm run lhci-server:stop",
+    "lhci:collect": "npm run concurrently \"npm:lhci-server:start\" \"npm:lhci-cli:autorun:local\""
   },
   "private": true,
   "dependencies": {
