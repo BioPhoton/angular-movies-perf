@@ -11,6 +11,11 @@ on:
 
 jobs:
   checkout:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
+    steps:
   install:
     needs: checkout
   build:
