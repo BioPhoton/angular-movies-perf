@@ -4,8 +4,9 @@ module.exports = {
       staticDistDir: "dist/hub-movies",
     },
     upload: {
-      target: "filesystem",
-      outputDir: ".lighthouseci"
+      target: "temporary-public-storage",
+      // target: "filesystem",
+      // outputDir: ".lighthouseci"
     },
   },
 };
