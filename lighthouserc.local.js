@@ -2,7 +2,7 @@
 module.exports = {
   ci: {
     collect: {
-      numberOfRuns: 1,
+      numberOfRuns: 10,
       staticDistDir: "dist/hub-movies",
     },
     upload: {
