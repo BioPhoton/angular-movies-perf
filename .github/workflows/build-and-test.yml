@@ -10,11 +10,11 @@ on:
     branches: [ master ]
 
 jobs:
-  runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [ 14.x ]
-  setup-and-install:
+  checkout:
+    runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          node-version: [ 14.x ]
     steps:
       - uses: actions/checkout@v2
         with:
@@ -42,6 +42,7 @@ jobs:
           HUSKY_SKIP_INSTALL: 'true'
         run: npm install
   lint:
+    steps:
       - name: Lint Application
         run: npm run ng lint
 
