@@ -15,9 +15,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
-import { AppShellComponent } from './app.component';
-import { AuthService } from './core/auth/auth.service';
-import { StorageService } from './shared/service/storage/storage.service';
+import { AppShellComponent } from './app-shell.component';
+import { AuthService } from '../auth/auth.service';
+import { StorageService } from '../shared/service/storage/storage.service';
 
 const translations: any = {foo: 'bar'};
 
@@ -27,7 +27,7 @@ class FakeLoader implements TranslateLoader {
   }
 }
 
-describe('AppComponent', () => {
+describe('AppShellComponent', () => {
   const firebaseConfig = {
     apiKey: 'foo',
     authDomain: 'bar',
