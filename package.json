@@ -16,7 +16,8 @@
     "bundle-report": "npm build && webpack-bundle-analyzer dist/hub-movies/stats.json",
     "lhci-server:start": "npm run lhci --  server --https --storage.storageMethod=sql --storage.sqlDialect=sqlite --storage.sqlDatabasePath=./.lighthouseci/db.sql",
     "lhci-cli:autorun:local": "npm run lhci -- autorun --config=lighthouserc.local.js && npm run kill",
-    "lhci:collect": "npm run concurrently \"npm run lhci-server:start\" \"npm:lhci-cli:autorun:local\"",
+    "lhci-cli:autorun:ci": "npm run lhci -- autorun --config=lighthouserc.github.js && npm run kill",
+    "lhci:collect": "npm run concurrently \"npm run lhci-server:start\" \"npm:lhci-cli:autorun:ci\"",
     "kill": "node kill.js"
   },
   "private": true,
