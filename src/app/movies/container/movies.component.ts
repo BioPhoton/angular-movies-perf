@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieCategoryModel } from './shared/movie-category.model';
-import { MovieModel } from './shared/movie.model';
+import { MovieCategoryModel } from '../model/movie-category.model';
+import { MovieModel } from '../model/movie.model';
 import { Observable, Subscription } from 'rxjs';
-import { AuthService } from 'app/core/auth/auth.service';
+import { AuthService } from 'app/auth/auth.service';
 import { TmdbService } from 'app/shared/service/tmdb/tmdb.service';
 import { ActivatedRoute, Params, NavigationEnd, Router } from '@angular/router';
 import { StorageService } from 'app/shared/service/storage/storage.service';

@@ -15,8 +15,9 @@ interface User {
     pseudo?: string;
 }
 
-@Injectable()
-
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
     user: Observable<User>;
     redirectUrl: string;
