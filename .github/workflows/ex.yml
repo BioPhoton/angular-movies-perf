@@ -30,8 +30,8 @@ jobs:
   install:
     needs: checkout
     steps:
-      - name: Use cache key ${{ runner.os }}-npm
-      - uses: actions/cache@v2
+        name: Use cache key ${{ runner.os }}-npm
+        uses: actions/cache@v2
         id: npm-cache
         with:
           path: |
@@ -39,4 +39,4 @@ jobs:
             ~/.cache/Cypress
           key: ${{ runner.os }}-npm-${{ hashFiles('./package-lock.json') }}
           restore-keys: ${{ runner.os }}-npm
-      - run: npm install
+        run: npm install
