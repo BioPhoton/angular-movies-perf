@@ -38,8 +38,6 @@ jobs:
             ~/.cache/Cypress
           key: ${{ runner.os }}-npm-${{ hashFiles('./package-lock.json') }}
           restore-keys: ${{ runner.os }}-npm
-      - name: Install dependencies
-      if: steps.npm-cache.outputs.cache-hit != 'true'
       env:
         HUSKY_SKIP_INSTALL: 'true'
       run: npm install
