@@ -73,7 +73,6 @@ jobs:
             .lighthouseci
             !.lighthouseci/db.sql
 
-      - name: Update lhci-db
       - uses: EndBug/add-and-commit@v4 # You can change this to use a specific version
         with:
           add: '.lighthouseci/db.sql'
