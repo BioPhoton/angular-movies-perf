@@ -13,7 +13,8 @@
     "ngsw-config": "node_modules/.bin/ngsw-config dist ./src/ngsw-config.json",
     "serve:ngsw": "npm run ngsw-config && http-server dist -p 8080",
     "bundle-report": "npm build && webpack-bundle-analyzer dist/hub-movies/stats.json",
-    "lhci-server:start": "npm run lhci --  server --https --storage.storageMethod=sql --storage.sqlDialect=sqlite --storage.sqlDatabasePath=./.lighthouseci/db.sql"
+    "lhci-server:start": "npm run lhci --  server --https --storage.storageMethod=sql --storage.sqlDialect=sqlite --storage.sqlDatabasePath=./.lighthouseci/db.sql",
+    "lhci-ci:autorun:local": "npm run lhci -- autorun --config=lighthouserc.local.js"
   },
   "private": true,
   "dependencies": {
