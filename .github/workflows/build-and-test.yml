@@ -72,9 +72,10 @@ jobs:
           # budgetPath: ./budget.json # test performance budgets
           uploadArtifacts: true # save results as an action artifacts
 
-      - uses: tzkhan/pr-update-action@v2
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          head-branch-regex: '.+'
-          body-template: "[PR LHCI report](${{ steps.LHCIAction.outputs.links }}) | ${{ steps.LHCIAction.outputs.links }}"
-          body-update-action: 'suffix'
+    # TODO add link to report
+    #  - uses: tzkhan/pr-update-action@v2
+    #    with:
+    #      repo-token: "${{ secrets.GITHUB_TOKEN }}"
+    #      head-branch-regex: '.+'
+    #      body-template: "[PR LHCI report](${{ steps.LHCIAction.outputs.links }}) | ${{ steps.LHCIAction.outputs.links }}"
+    #      body-update-action: 'suffix'
