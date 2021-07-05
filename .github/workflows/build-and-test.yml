@@ -49,10 +49,8 @@ jobs:
       - name: Build Application
         run: npm run ng build -- --configuration production --stats-json
 
-
       - name: Collect lhci report in github
         run: npm run lhci:collect
-
 
       - name: Archive build artifacts
         uses: actions/upload-artifact@v2
