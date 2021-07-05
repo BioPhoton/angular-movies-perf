@@ -62,16 +62,13 @@ jobs:
           name: bundle-report--hub-movies
           path: dist/hub-movies/stats.json
 
-      - name: Start lhci server
-        run: npm run lhci-server:start
-
       - name: Audit build using Lighthouse
         uses: treosh/lighthouse-ci-action@v7
         env:
           # LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           LHCI_TOKEN: ${{ secrets.LHCI_TOKEN }}
         with:
-          configPath: './lighthouserc.js'
+          configPath: './lighthouserc.github.js'
           # budgetPath: ./budget.json # test performance budgets
           uploadArtifacts: true # save results as an action artifacts
 
