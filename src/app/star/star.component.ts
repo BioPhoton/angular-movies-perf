@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, Component, OnInit, TrackByFunction} from '@angular/core';
-import {Location} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
-import {forkJoin} from 'rxjs';
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { forkJoin } from 'rxjs';
 /* SERVICES */
 import {TmdbService} from '../shared/service/tmdb/tmdb.service';
 import {StorageService} from '../shared/service/storage/storage.service';
 /* MODEL */
-import {MovieCastModel, MovieModel, MoviePersonModel, TvCastModel, TvCreditsModel} from '../movies/model';
+import {MoviePersonModel, TvCastModel, MovieCastModel, MovieModel, TvCreditsModel} from '../movies/model';
 
 @Component({
   selector: 'app-star',

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TrackByFunction} from '@angular/core';
+import {Component, Output, EventEmitter, Input, ChangeDetectionStrategy, TrackByFunction} from '@angular/core';
 import {Pager} from '../../model/pager.model';
 
 @Component({
