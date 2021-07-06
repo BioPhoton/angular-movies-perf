@@ -1,13 +1,11 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, TrackByFunction} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
-import { ShareModalComponent } from '../shared/component/share-modal/share-modal.component';
-import { MovieDatabaseModel } from '../shared/model/movie-database.model';
-import { DatabaseService } from '../shared/service/database/database.service';
-import {MovieCastModel, MovieGenreModel, MovieModel} from '../movies/model';
-import {SafeResourceUrl} from '@angular/platform-browser';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {TranslateService} from '@ngx-translate/core';
+import {Subscription} from 'rxjs';
+import {ShareModalComponent} from '../shared/component/share-modal/share-modal.component';
+import {MovieDatabaseModel} from '../shared/model/movie-database.model';
+import {DatabaseService} from '../shared/service/database/database.service';
 
 @Component({
   selector: 'app-playlist',

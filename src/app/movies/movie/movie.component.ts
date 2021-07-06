@@ -1,17 +1,17 @@
-import { Location } from '@angular/common';
+import {Location} from '@angular/common';
 import {ChangeDetectionStrategy, Component, OnInit, TrackByFunction} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { forkJoin, Subscription } from 'rxjs';
-import { AuthService } from '../../auth/auth.service';
-import { ShareModalComponent } from '../../shared/component/share-modal/share-modal.component';
-import { MovieDatabaseModel } from '../../shared/model/movie-database.model';
-import { DatabaseService } from '../../shared/service/database/database.service';
-import { StorageService } from '../../shared/service/storage/storage.service';
-import { TmdbService } from '../../shared/service/tmdb/tmdb.service';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {forkJoin, Subscription} from 'rxjs';
+import {AuthService} from '../../auth/auth.service';
+import {ShareModalComponent} from '../../shared/component/share-modal/share-modal.component';
+import {MovieDatabaseModel} from '../../shared/model/movie-database.model';
+import {DatabaseService} from '../../shared/service/database/database.service';
+import {StorageService} from '../../shared/service/storage/storage.service';
+import {TmdbService} from '../../shared/service/tmdb/tmdb.service';
 import {MovieCastModel, MovieCrewModel, MovieDetailsModel, MovieGenreModel, MovieModel} from '../model';
 import {MovieTrailerComponent} from './movie-trailer/movie-trailer.component';
 
@@ -135,7 +135,7 @@ export class MovieComponent implements OnInit {
   }
 
   openDialogTrailer(url: any): void {
-    const dialogRef = this.dialog.open(MovieTrailerComponent, {
+    this.dialog.open(MovieTrailerComponent, {
       height: '400px',
       width: '600px',
       data: {url}
