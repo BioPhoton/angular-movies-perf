@@ -1,35 +1,42 @@
-import {inject, TestBed} from '@angular/core/testing';
-import {AngularFireModule} from '@angular/fire/compat';
-import {AngularFireAuthModule} from '@angular/fire/compat/auth';
-import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
-import {DatabaseService} from './database.service';
+import { inject, TestBed } from '@angular/core/testing';
+import { FirebaseApp, initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { AuthService } from '../../../auth/auth.service';
+import { MoviesFirebase, MoviesFirestore } from '../../../firebase-app';
+import { DatabaseService } from './database.service';
 
 describe('DatabaseService', () => {
-
   const firebaseConfig = {
     apiKey: 'foo',
     authDomain: 'bar',
     databaseURL: 'baz',
     projectId: '0',
     storageBucket: 'foo',
-    messagingSenderId: 'bar'
+    messagingSenderId: 'bar',
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        AngularFireAuthModule,
-        AngularFireModule.initializeApp(firebaseConfig),
-        AngularFirestoreModule
-      ],
       providers: [
-        AngularFireAuthModule,
-        DatabaseService
-      ]
+        {
+          provide: MoviesFirebase,
+          useFactory: () => initializeApp(firebaseConfig),
+        },
+        {
+          provide: MoviesFirestore,
+          useFactory: (app: FirebaseApp) => getFirestore(app),
+          deps: [MoviesFirebase],
+        },
+        AuthService,
+        DatabaseService,
+      ],
     });
   });
 
-  it('should be created', inject([DatabaseService], (service: DatabaseService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created', inject(
+    [DatabaseService],
+    (service: DatabaseService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });

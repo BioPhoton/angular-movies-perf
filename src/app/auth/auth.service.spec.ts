@@ -1,9 +1,9 @@
-import {inject, TestBed} from '@angular/core/testing';
-import {AngularFireModule} from '@angular/fire/compat';
-import {AngularFireAuthModule} from '@angular/fire/compat/auth';
-import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
-import {RouterTestingModule} from '@angular/router/testing';
-import {AuthService} from './auth.service';
+import { inject, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FirebaseApp, initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { MoviesFirebase, MoviesFirestore } from '../firebase-app';
+import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
   const firebaseConfig = {
@@ -12,22 +12,24 @@ describe('AuthService', () => {
     databaseURL: 'baz',
     projectId: '0',
     storageBucket: 'foo',
-    messagingSenderId: 'bar'
+    messagingSenderId: 'bar',
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        AngularFireAuthModule,
-        AngularFireModule.initializeApp(firebaseConfig),
-        RouterTestingModule,
-        AngularFirestoreModule
-      ],
+      imports: [RouterTestingModule],
       providers: [
+        {
+          provide: MoviesFirebase,
+          useFactory: () => initializeApp(firebaseConfig),
+        },
+        {
+          provide: MoviesFirestore,
+          useFactory: (app: FirebaseApp) => getFirestore(app),
+          deps: [MoviesFirebase],
+        },
         AuthService,
-        AngularFireAuthModule,
-        AngularFirestoreModule
-      ]
+      ],
     });
   });
 

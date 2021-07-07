@@ -1,19 +1,19 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {AngularFireModule} from '@angular/fire/compat';
-import {AngularFireAuthModule} from '@angular/fire/compat/auth';
-import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatInputModule} from '@angular/material/input';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {RouterTestingModule} from '@angular/router/testing';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {Observable, of} from 'rxjs';
-import {AuthService} from '../auth/auth.service';
-import {AccountComponent} from './account.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { FirebaseApp, initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { Observable, of } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
+import { MoviesFirebase, MoviesFirestore } from '../firebase-app';
+import { AccountComponent } from './account.component';
 
-const translations: any = {foo: 'bar'};
+const translations: any = { foo: 'bar' };
 
 class FakeLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {
@@ -31,34 +31,40 @@ describe('AccountComponent', () => {
     databaseURL: 'baz',
     projectId: '0',
     storageBucket: 'foo',
-    messagingSenderId: 'bar'
+    messagingSenderId: 'bar',
   };
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        AngularFireAuthModule,
-        AngularFireModule.initializeApp(firebaseConfig),
-        AngularFirestoreModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatDialogModule,
-        MatInputModule,
-        MatSnackBarModule,
-        RouterTestingModule,
-        TranslateModule.forRoot({
-          loader: {provide: TranslateLoader, useClass: FakeLoader},
-        })
-      ],
-      declarations: [ AccountComponent ],
-      providers: [
-        AuthService,
-        AngularFireAuthModule,
-      ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          BrowserAnimationsModule,
+          FormsModule,
+          ReactiveFormsModule,
+          MatDialogModule,
+          MatInputModule,
+          MatSnackBarModule,
+          RouterTestingModule,
+          TranslateModule.forRoot({
+            loader: { provide: TranslateLoader, useClass: FakeLoader },
+          }),
+        ],
+        declarations: [AccountComponent],
+        providers: [
+          {
+            provide: MoviesFirebase,
+            useFactory: () => initializeApp(firebaseConfig),
+          },
+          {
+            provide: MoviesFirestore,
+            useFactory: (app: FirebaseApp) => getFirestore(app),
+            deps: [MoviesFirebase],
+          },
+          AuthService,
+        ],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AccountComponent);
