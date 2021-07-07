@@ -9,7 +9,7 @@ import { AuthService } from 'app/auth/auth.service';
 import { DatabaseService } from 'app/shared/service/database/database.service';
 import { StorageService } from 'app/shared/service/storage/storage.service';
 import { TmdbService } from 'app/shared/service/tmdb/tmdb.service';
-import { FirebaseApp, initializeApp } from 'firebase/app';
+import { FirebaseApp, initializeApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { Observable, of } from 'rxjs';
@@ -61,7 +61,10 @@ describe('MoviesComponent', () => {
         providers: [
           {
             provide: MoviesFirebase,
-            useFactory: () => initializeApp(firebaseConfig),
+            useFactory: () =>
+              getApps().length === 0
+                ? initializeApp(firebaseConfig)
+                : getApps()[0],
           },
           {
             provide: MoviesFirestore,

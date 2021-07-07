@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { FirebaseApp, initializeApp } from 'firebase/app';
+import { FirebaseApp, initializeApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { Observable, of } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
@@ -44,7 +44,10 @@ describe('SignInComponent', () => {
         providers: [
           {
             provide: MoviesFirebase,
-            useFactory: () => initializeApp(firebaseConfig),
+            useFactory: () =>
+              getApps().length === 0
+                ? initializeApp(firebaseConfig)
+                : getApps()[0],
           },
           {
             provide: MoviesFirestore,

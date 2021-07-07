@@ -6,7 +6,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { FirebaseApp, initializeApp } from 'firebase/app';
+import { FirebaseApp, initializeApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { Observable, of } from 'rxjs';
@@ -57,7 +57,10 @@ describe('MovieListComponent', () => {
         providers: [
           {
             provide: MoviesFirebase,
-            useFactory: () => initializeApp(firebaseConfig),
+            useFactory: () =>
+              getApps().length === 0
+                ? initializeApp(firebaseConfig)
+                : getApps()[0],
           },
           {
             provide: MoviesFirestore,

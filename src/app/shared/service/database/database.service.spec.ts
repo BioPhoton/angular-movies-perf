@@ -1,5 +1,6 @@
 import { inject, TestBed } from '@angular/core/testing';
-import { FirebaseApp, initializeApp } from 'firebase/app';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FirebaseApp, initializeApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { AuthService } from '../../../auth/auth.service';
 import { MoviesFirebase, MoviesFirestore } from '../../../firebase-app';
@@ -17,10 +18,14 @@ describe('DatabaseService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       providers: [
         {
           provide: MoviesFirebase,
-          useFactory: () => initializeApp(firebaseConfig),
+          useFactory: () =>
+            getApps().length === 0
+              ? initializeApp(firebaseConfig)
+              : getApps()[0],
         },
         {
           provide: MoviesFirestore,

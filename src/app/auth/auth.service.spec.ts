@@ -1,6 +1,6 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FirebaseApp, initializeApp } from 'firebase/app';
+import { FirebaseApp, initializeApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { MoviesFirebase, MoviesFirestore } from '../firebase-app';
 import { AuthService } from './auth.service';
