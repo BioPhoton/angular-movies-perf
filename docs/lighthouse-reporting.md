@@ -2,14 +2,19 @@
 
 To get a better understanding ov our progress we us a set of lighthouse tools to get relevant numbers per commit directly in the CI setup.
 
+![lighthouse-ci_tools_michael-hladky](https://user-images.githubusercontent.com/10064416/124685698-10209000-ded2-11eb-81e6-e0cb2416a16d.png)
+
 Lighthouse provides the following tools:
 
 - `@lhci/cli` - A CLI too to spin up websites form the file system or directly from a URL
 - `@lhci/server` - A server able to recieve reports over HTTP post requests and a UI displaying the progress over time.
 
+
+# Setup
+
 ![lighthouse-ci_github-action-flow_michael-hladky](https://user-images.githubusercontent.com/10064416/124683232-dbf6a080-decc-11eb-81b5-ebcc6bc547bf.png)
 
-# Setup & Configure Lighthouse-CI CLI
+## Setup & Configure Lighthouse-CI CLI
 
 Install the CLI in your repository by running `npm i -D @lhci/cli`
 
@@ -50,7 +55,7 @@ You should see the results in directly the root.
 
 To organize the reporting artefacts better lighthouse-ci will introduce a `.lighthouseci` folder and automatically store the reports in this folder.
 
-# Setup & Connfigure Lighhouse-CI Server
+## Setup & Connfigure Lighhouse-CI Server
 
 ```bash
 npm i -D @lhci/server sqlite3
@@ -65,7 +70,7 @@ You may also add this as a script to your `package.json`.
 ```json
 {
   scripts: {
-    "npm run lhci-server:start": "npm run lhci -- server --storage.storageMethod=sql --storage.sqlDialect=sqlite --storage.sqlDatabasePath=./db.sql"
+    "lhci-server:start": "npm run lhci -- server --storage.storageMethod=sql --storage.sqlDialect=sqlite --storage.sqlDatabasePath=./db.sql"
   }
 }
 ```
@@ -74,7 +79,53 @@ The consol will prompt the port wherer lighthouse-ci is served. (by default 9001
 
 Open the browser under `http://localhost:9001/app/projects` to test it.
 
+## Connecting the repository to the Lighthouse-CI server
+
+To register a repository to the server be sure to start it first.
+Run `npm run lhci-server:start`.
+
+In another console type `npm run lhci wizard`. This will spin up a prompt where you can connect to the server.
+
+> Which wizard do you want to run? **new-project**
+
+> What is the URL of your LHCI server? **http://localhost:9001**
+
+> What would you like to name the project? **[PROJECT_NAME]**
+
+> Where is the project's code hosted? **[URL_TO_REPOSITORY]**
+
+It will redirect you the the server where it prints you the admin and build key.
+
+Take the build key and save it to GitHub as sekret under `LHCI_GITHUB_TOKEN`.
+
+Now you should be able to post the reports to the lighthouse-ci server.
+
+Open your `lighthouserc.js` and add following lines:
+
+```javascript
+module.exports = {
+  ci: {
+    collect: {
+      // needed if auto discovery is not able to find the projects build artefacts automatically
+      staticDistDir: "dist/project-name",
+    },
+    upload: {
+      // save target is a custom lhci server
+      target: "lhci",
+      // url of the local server
+      serverBaseUrl: "http://localhost:9001",
+      // token retrieved in the setup and connect step
+      token: "BUILD_TOKEN" // could also use LHCI_TOKEN variable instead
+    },
+  },
+};
+```
+
+To test it run `npm run lhci -- autorun`.
+This should spin up your build and runs lighthouse against it.
 
 
-# CI
+
+
+
 
