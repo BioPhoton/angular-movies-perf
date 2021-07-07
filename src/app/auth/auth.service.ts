@@ -1,21 +1,25 @@
 import { Inject, Injectable } from '@angular/core';
-import { doc, FirebaseFirestore, getDoc, updateDoc } from 'firebase/firestore';
+import { Router } from '@angular/router';
 import { FirebaseApp } from 'firebase/app';
 import {
   Auth,
-  User as FireUser,
-  signOut,
+  FacebookAuthProvider,
   getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
+  signOut,
   TwitterAuthProvider,
-  updateCurrentUser
+  User as FireUser,
 } from 'firebase/auth';
-import { Router } from '@angular/router';
-import { BehaviorSubject, ConnectableObservable, Observable, of, ReplaySubject } from 'rxjs';
-import { distinctUntilChanged, map, publish, publishReplay, switchMap } from 'rxjs/operators';
+import { doc, FirebaseFirestore, getDoc, updateDoc } from 'firebase/firestore';
+import { ConnectableObservable, of, ReplaySubject } from 'rxjs';
+import {
+  distinctUntilChanged,
+  map,
+  publishReplay,
+  switchMap,
+} from 'rxjs/operators';
 import { MoviesFirebase, MoviesFirestore } from '../firebase-app';
 
 interface User extends FireUser {
@@ -23,17 +27,19 @@ interface User extends FireUser {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   // tslint:disable-next-line:variable-name
   private _user = new ReplaySubject<User>(1);
   user = this._user.pipe(
-    map(u => u?.uid),
+    map((u) => u?.uid),
     distinctUntilChanged(),
-    switchMap(uid => {
+    switchMap((uid) => {
       if (uid) {
-        return getDoc(doc(this.store, `Users/${ uid }`)).then(userData => userData.data());
+        return getDoc(doc(this.store, `Users/${uid}`)).then((userData) =>
+          userData.data()
+        );
       } else {
         return of(null);
       }
@@ -46,7 +52,7 @@ export class AuthService {
   constructor(
     private router: Router,
     @Inject(MoviesFirestore) private store: FirebaseFirestore,
-    @Inject(MoviesFirebase) app: FirebaseApp,
+    @Inject(MoviesFirebase) app: FirebaseApp
   ) {
     this.fireAuth = getAuth(app);
     (this.user as ConnectableObservable<User>).connect();
@@ -55,11 +61,11 @@ export class AuthService {
 
   oAuthLogin(name: string, callback: any) {
     return signInWithPopup(this.fireAuth, this.getProvider(name))
-      .then(credential => {
+      .then((credential) => {
         callback();
         this.updateUserData(credential.user);
       })
-      .catch(err => callback(err));
+      .catch((err) => callback(err));
   }
 
   getProvider(name: string) {
@@ -81,19 +87,18 @@ export class AuthService {
     return this._user;
   }
 
-
   deleteUser(callback: any) {
     return signOut(this.fireAuth).catch(callback);
   }
 
   private updateUserData(user) {
-    return updateDoc(doc(this.store, `Users/${ user.uid }`), {
+    return updateDoc(doc(this.store, `Users/${user.uid}`), {
       displayName: user.displayName,
       email: user.email,
       photoURL: user.photoURL,
       phoneNumber: user.phoneNumber,
       uid: user.uid,
-      pseudo: null
+      pseudo: null,
     });
   }
 }
