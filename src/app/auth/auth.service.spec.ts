@@ -21,7 +21,10 @@ describe('AuthService', () => {
       providers: [
         {
           provide: MoviesFirebase,
-          useFactory: () => initializeApp(firebaseConfig),
+          useFactory: () =>
+            getApps().length === 0
+              ? initializeApp(firebaseConfig)
+              : getApps()[0],
         },
         {
           provide: MoviesFirestore,
