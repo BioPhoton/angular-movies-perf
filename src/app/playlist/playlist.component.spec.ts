@@ -10,9 +10,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {RouterTestingModule} from '@angular/router/testing';
 import {PlaylistComponent} from './playlist.component';
 import {DatabaseService} from '../shared/service/database/database.service';
-import {AngularFireAuthModule} from '@angular/fire/auth';
-import {AngularFireModule} from '@angular/fire';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireAuthModule} from '@angular/fire/compat/auth';
+import {AngularFireModule} from '@angular/fire/compat';
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {Observable, of} from 'rxjs';
 
