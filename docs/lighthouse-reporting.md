@@ -96,7 +96,13 @@ In another console type `npm run lhci wizard`. This will spin up a prompt where 
 
 It will redirect you the the server where it prints you the admin and build key.
 
-Take the build key and save it to GitHub as sekret under `LHCI_GITHUB_TOKEN`.
+Open the browser under `http://localhost:9001/app/projects/`. 
+You should see the following:
+![lighthouse-ci-server_main-page_michael-hladky](https://user-images.githubusercontent.com/10064416/124686557-a6a18100-ded3-11eb-869a-ac73d05d9a81.png)
+
+
+
+Take the build key and save it to GitHub as secret under `LHCI_GITHUB_TOKEN`.
 
 Now you should be able to post the reports to the lighthouse-ci server.
 
@@ -122,7 +128,10 @@ module.exports = {
 ```
 
 To test it run `npm run lhci -- autorun`.
-This should spin up your build and runs lighthouse against it.
+This should spin up your build and runs lighthouse against it. After it is done it will upload the results to your lhci server instance.
+
+![lighthouse-ci-server_repo-overview_michael-hladky](https://user-images.githubusercontent.com/10064416/124686610-b9b45100-ded3-11eb-9053-e3f6675a0967.png)
+
 
 
 
