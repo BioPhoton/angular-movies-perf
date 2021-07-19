@@ -30,7 +30,6 @@ export class MyHammerConfig extends HammerGestureConfig {
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
@@ -40,6 +39,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     }),
     MoviesRoutedModule,
     AppShellModule,
+    AppRoutingModule,
   ],
   providers: [
     httpInterceptorProviders,

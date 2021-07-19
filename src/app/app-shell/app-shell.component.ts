@@ -90,6 +90,8 @@ export class AppShellComponent implements OnInit, OnDestroy {
     sessionStorage.setItem('hubmovies-current-page', '1');
   }
 
-  trackByGenre: TrackByFunction<MovieGenreModel> = (genre: MovieGenreModel) =>
-    genre.name
+  trackByGenre: TrackByFunction<MovieGenreModel> = (
+    idx: number,
+    genre: MovieGenreModel
+  ) => genre.name
 }

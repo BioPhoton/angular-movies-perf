@@ -19,9 +19,7 @@ const routes: Routes = [
       import('app/account/account.module').then((m) => m.AccountModule),
     canActivate: [AuthGuard],
   },
-
-  // {path: '', redirectTo: 'movies/popular'},
-  // {path: '**', redirectTo: 'movies/popular'}
+  { path: '**', redirectTo: 'movies/popular' },
 ];
 
 @NgModule({
