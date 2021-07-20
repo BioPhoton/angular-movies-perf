@@ -41,7 +41,7 @@ export class AppShellComponent implements OnInit, OnDestroy {
     private router: Router,
     private snackbar: MatSnackBar
   ) {
-    this.mobileQuery = media.matchMedia('(max-width: 731px)');
+    this.mobileQuery = media.matchMedia('(max-width: 1299px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -91,5 +91,5 @@ export class AppShellComponent implements OnInit, OnDestroy {
   trackByGenre: TrackByFunction<MovieGenreModel> = (
     idx: number,
     genre: MovieGenreModel
-  ) => genre.name
+  ) => genre.name;
 }

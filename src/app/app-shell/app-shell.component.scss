@@ -20,23 +20,39 @@
 
 .app-sidenav {
     min-height: 100vh;
-    background: $black;
+    background: var(--palette-background-default);
 
-    ::ng-deep .mat-sidenav {
-        background: $background;
-
-        @media only screen and (max-width: 731px) {
-            position: fixed;
-        }
-
+    ::ng-deep {
+      .mat-sidenav {
+        background: var(--palette-background-default);
         &-content {
-            background: inherit;
+          background: inherit;
         }
+      }
+      .mat-drawer-side {
+        width: 25rem;
+        padding: 2rem;
+        margin-top: 4rem;
+        border-color: var(--palette-divider);
+      }
     }
 
 }
 
 .navigation {
+  display: flex;
+  flex-direction: column;
+
+  &--header {
+    width: 100%;
+    height: 18rem;
+    display: grid;
+    place-items: center;
+    margin-bottom: 2rem;
+    .logo-img {
+      max-width: 75%;
+    }
+  }
     &--search {
         background: $primary-light;
         min-height: 3rem;
@@ -76,21 +92,42 @@
                 color: $white;
             }
         }
-        a {
-            display: block;
-            padding: .625rem 0;
-            color: $white;
-            &:hover {
-                color: $primary-light;
-            }
-            .mat-icon {
-                height: 1.75rem;
-            }
-        }
-        .active {
-            color: $primary-light;
-        }
     }
+  &--link {
+    outline: none;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--palette-primary-main);
+    &.active {
+      color: var(--palette-secondary-main);
+    }
+  }
+  &--menu-item {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+  &--menu-item-icon {
+    margin-right: 10px;
+    width: .875em;
+    height: auto;
+    font-size: 1em;
+  }
+  &--headline {
+    &:not(:first-child) {
+      margin-top: 4rem;
+    }
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--palette-text-primary);
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    margin: 0px 0px 1rem 1rem;
+  }
 }
 
 .btn-menu {
