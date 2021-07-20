@@ -1,7 +1,6 @@
 import {
   HttpEvent,
   HttpHandler,
-  HttpHeaders,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
@@ -9,15 +8,6 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { AuthStateService } from '../../../auth/auth.state';
-
-const getAuthHeaders: (token: string) => HttpHeaders = (token: string) =>
-  new HttpHeaders({
-    Authorization: `Bearer ${token}`,
-  });
-
-const readAccessHeaders: HttpHeaders = new HttpHeaders({
-  Authorization: `Bearer ${environment.tmdbApiReadAccessKey}`,
-});
 
 @Injectable({
   providedIn: 'root',

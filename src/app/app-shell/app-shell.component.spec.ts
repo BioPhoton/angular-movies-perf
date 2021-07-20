@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { FirebaseApp, initializeApp, getApps } from 'firebase/app';
+import { FirebaseApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { Observable, of } from 'rxjs';
 import { MoviesFirebase, MoviesFirestore } from '../firebase-app';

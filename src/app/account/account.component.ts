@@ -1,10 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
 import { setProp } from '../shared/utils/css-variables';
 import { stringColor } from '../shared/utils/color';
-import { filter, map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { AuthStateService } from '../auth/auth.state';
 
 @Component({
@@ -16,7 +13,7 @@ import { AuthStateService } from '../auth/auth.state';
 export class AccountComponent {
   accountId$ = this.authService.accountId$.pipe(
     // It's bad practice to add a side effect to a data stream and also use it for something else.
-    // In this case we do it becase of simplicity
+    // In this case we do it because of simplicity
     tap((displayName) => {
       // **🚀 Perf Tip:**
       // Use css variables instead of Angular directives or template experssions to avoid change detection
@@ -24,10 +21,5 @@ export class AccountComponent {
     })
   );
 
-  constructor(
-    private authService: AuthStateService,
-    private snackBar: MatSnackBar,
-    private router: Router,
-    private dialog: MatDialog
-  ) {}
+  constructor(private authService: AuthStateService) {}
 }

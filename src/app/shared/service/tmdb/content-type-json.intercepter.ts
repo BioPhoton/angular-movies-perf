@@ -1,7 +1,6 @@
 import {
   HttpEvent,
   HttpHandler,
-  HttpHeaders,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';

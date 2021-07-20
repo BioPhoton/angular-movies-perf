@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {
   MovieCastModel,
@@ -40,11 +39,7 @@ export class MovieComponent implements OnInit {
   categories: string[] = [];
   lang: string;
 
-  constructor(
-    public dialog: MatDialog,
-    private location: Location,
-    private route: ActivatedRoute
-  ) {}
+  constructor(public dialog: MatDialog, private location: Location) {}
 
   ngOnInit() {}
 

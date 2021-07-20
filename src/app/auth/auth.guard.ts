@@ -5,7 +5,6 @@ import {
   CanActivateChild,
   CanLoad,
   Route,
-  Router,
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,7 +15,7 @@ import { AuthStateService } from './auth.state';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  constructor(private authService: AuthStateService, private router: Router) {}
+  constructor(private authService: AuthStateService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,

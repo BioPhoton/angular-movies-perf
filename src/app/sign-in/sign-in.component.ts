@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { TmdbAuthEffects } from '../auth/tmdbAuth.effects';
 
 @Component({
@@ -11,7 +10,7 @@ import { TmdbAuthEffects } from '../auth/tmdbAuth.effects';
 export class SignInComponent {
   error: string;
 
-  constructor(private router: Router, private tmdbService: TmdbAuthEffects) {}
+  constructor(private tmdbService: TmdbAuthEffects) {}
 
   signIn() {
     this.tmdbService.approveRequestToken();

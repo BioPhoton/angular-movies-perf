@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { exhaustMap, map, take } from 'rxjs/operators';
 import { Tmdb2Service } from '../shared/service/tmdb/tmdb2.service';
@@ -9,11 +8,7 @@ import { AuthStateService, isAuthenticationInProgress } from './auth.state';
   providedIn: 'root',
 })
 export class TmdbAuthEffects {
-  constructor(
-    private router: Router,
-    private authState: AuthStateService,
-    private tmdb: Tmdb2Service
-  ) {
+  constructor(private authState: AuthStateService, private tmdb: Tmdb2Service) {
     this.restoreLogin();
   }
 

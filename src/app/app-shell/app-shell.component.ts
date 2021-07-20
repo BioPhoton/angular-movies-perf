@@ -11,7 +11,6 @@ import {
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { StorageService } from '../shared/service/storage/storage.service';
 import { AuthStateService } from '../auth/auth.state';
 import { TmdbAuthEffects } from '../auth/tmdbAuth.effects';
 import { StateService } from '../shared/service/state.service';
@@ -40,8 +39,7 @@ export class AppShellComponent implements OnInit, OnDestroy {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private router: Router,
-    private snackbar: MatSnackBar,
-    private storageService: StorageService
+    private snackbar: MatSnackBar
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 731px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();

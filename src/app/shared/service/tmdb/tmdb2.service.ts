@@ -15,10 +15,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class Tmdb2Service {
-  constructor(private http: HttpClient) {
-    console.log('env', environment);
-  }
-  private apiKey = environment.tmdbApiKey;
+  constructor(private http: HttpClient) {}
+
   private apiVersion = environment.tmdbApiVersion;
   private apiNewVersion = environment.tmdbApiNewVersion;
   private baseUrl = [environment.tmdbBaseUrl, this.apiVersion].join('/');
@@ -41,11 +39,9 @@ export class Tmdb2Service {
     'list',
   ].join('/');
   private URL_CONFIGURATION = [this.baseUrl, 'configuration'].join('/');
-  private URL_DISCOVER = [this.baseUrl, 'discover', 'movie'].join('/');
   private URL_SEARCH = [this.baseUrl, 'search', 'movie'].join('/');
   private URL_MOVIE = [this.baseUrl, 'movie'].join('/');
   private URL_PERSON = [this.baseUrl, 'person'].join('/');
-  private URL_GENRE = [this.baseUrl, 'genre'].join('/');
   private URL_GENRE_MOVIE_LIST = [this.baseUrl, 'genre', 'movie', 'list'].join(
     '/'
   );
