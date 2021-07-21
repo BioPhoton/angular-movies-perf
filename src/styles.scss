@@ -1,14 +1,7 @@
 @import "assets/scss/custom_theme";
 @import "assets/scss/palette";
+@import "assets/scss/typography";
 
-@font-face {
-  font-family: "Roboto";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 500;
-  src: local("Roboto"),
-  url("./assets/fonts/roboto-v18-latin-regular.woff2") format("woff2");
-}
 
 @font-face {
   font-family: "Material Icons";
@@ -50,9 +43,7 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: "Roboto";
-  font-size: 1rem;
-  background-color: $white;
+  background-color: var(--palette-background-default);
 }
 
 /* Launcher */
@@ -67,7 +58,7 @@ body {
 a {
   cursor: pointer;
   text-decoration: none;
-  color: $primary-light;
+  color: var(--palette-secondary-main);
   outline: none;
 }
 
@@ -83,25 +74,18 @@ li {
   list-style: none;
 }
 
-h1,
-h2,
-h3,
-h4 {
-  font-weight: normal;
-  color: $white;
-}
 
 .material-icons {
   vertical-align: middle;
 }
 
 .mat-dialog-actions {
-  color: $primary-light;
+  color: var(--palette-secondary-main);
 }
 
 .mat {
   &-menu-item {
-    color: $primary-light;
+    color: var(--palette-secondary-main);
   }
 }
 
@@ -124,18 +108,13 @@ h4 {
 .icon-container {
   background-position: center;
   background-size: cover;
-  border: 1px solid $primary-light;
+  border: 1px solid var(--palette-secondary-main);
   line-height: 2;
 
   .icon-person,
   .icon-movie {
-    color: $primary-light;
+    color: var(--palette-secondary-main);
   }
-}
-
-/* Dialog */
-h1.mat-dialog-title {
-  color: $black;
 }
 
 /* Column Flex */
@@ -179,7 +158,7 @@ h1.mat-dialog-title {
   .disabled a {
     cursor: default;
     pointer-events: none;
-    color: $grey;
+    color: var(--palette-action-disabled);
   }
 }
 
@@ -217,11 +196,6 @@ button {
   -moz-osx-font-smoothing: grayscale;
 }
 
-html {
-  font-size: 62.5%;
-  box-sizing: border-box;
-}
-
 @media screen and (prefers-reduced-motion: reduce) {
   html {
     -webkit-scroll-behavior: auto;
@@ -229,24 +203,6 @@ html {
     -ms-scroll-behavior: auto;
     scroll-behavior: auto;
   }
-}
-
-@media only screen and (max-width: 1500px) {
-  html {
-    font-size: 57.5%;
-  }
-}
-
-@media only screen and (max-width: 1300px) {
-  html {
-    font-size: 55%;
-  }
-}
-
-body {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
-  line-height: 1.6;
 }
 
 form, input, textarea, button, select, a {
