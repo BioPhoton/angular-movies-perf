@@ -1,24 +1,4 @@
-<div class="app-toolbar" [class.app-toolbar--mobile]="mobileQuery.matches">
-  <mat-toolbar color="primary">
-    <button mat-icon-button (click)="snav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <div class="navigation--search">
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'App.Search movies' }}...</mat-label>
-        <input
-          matInput
-          #search
-          (keyup.enter)="searchMovie(search.value); search.value = ''"
-          (keyup.enter)="closeSidenav()"
-          tabindex="-1"
-        />
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-    </div>
-  </mat-toolbar>
-</div>
-<mat-sidenav-container class="app-sidenav">
+<mat-sidenav-container class="app-shell-container">
   <mat-sidenav
     [opened]="mobileQuery.matches ? 'false' : 'true'"
     #snav
@@ -52,7 +32,7 @@
       >
         <div class="navigation--menu-item">
           <mat-icon class="navigation--menu-item-icon">whatshot</mat-icon>
-        Top Rated
+          Top Rated
         </div>
       </a>
       <a
@@ -79,67 +59,56 @@
           {{ genre.name }}
         </div>
       </a>
-      <a
-        *ngIf="authState.accountId$ | async"
-        class="navigation--link"
-        routerLink="/account"
-        routerLinkActive="active"
-        (click)="closeSidenav()"
-      >
-        <div class="navigation--menu-item">
-          <mat-icon class="navigation--menu-item-icon">account_box</mat-icon>
-          Account
-        </div>
-      </a>
-      <a
-        *ngIf="(authState.accountId$ | async) !== true"
-        class="navigation--link"
-        routerLink="/sign-in"
-        routerLinkActive="active"
-        (click)="closeSidenav()"
-      >
-        <div class="navigation--menu-item">
-          <mat-icon class="navigation--menu-item-icon">account_circle</mat-icon>
-          Sign in
-        </div>
-      </a>
-
-      <a
-        *ngIf="authState.accountId$ | async"
-        class="navigation--link"
-        (click)="closeSidenav(); onSignOut()">
-        <div class="navigation--menu-item">
-          <mat-icon class="navigation--menu-item-icon">cancel</mat-icon>
-          Sign out
-        </div>
-      </a>
-      <a
-        class="navigation--link"
-        routerLink="/settings"
-        routerLinkActive="active"
-        (click)="closeSidenav()"
-      >
-        <div class="navigation--menu-item">
-          <mat-icon class="navigation--menu-item-icon">settings</mat-icon>
-          Settings
-        </div>
-      </a>
-      <a
-        class="navigation--link"
-        routerLink="/about"
-        routerLinkActive="active"
-        (click)="closeSidenav()"
-      >
-        <div class="navigation--menu-item">
-          <mat-icon class="navigation--menu-item-icon">info</mat-icon>
-          About
-        </div>
-      </a>
+      <picture class="tmdb-mark">
+        <source srcset="/assets/svgs/tmdbgreen.svg" media="(prefers-color-scheme: dark)" class="jsx-172304178">
+        <source srcset="/assets/svgs/tmdb.svg" media="(prefers-color-scheme: light)" class="jsx-172304178">
+        <img width="300" height="118" alt="The Movie Database" src="" class="jsx-172304178">
+      </picture>
     </nav>
   </mat-sidenav>
-  <div id="hub-movies">
+  <mat-sidenav-content>
+    <div class="app-toolbar">
+      <button class="app-toolbar--action" mat-icon-button (click)="snav.toggle()"
+              *ngIf="mobileQuery.matches">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="app-toolbar--widget-container">
+        <mat-form-field appearance="filled"
+                        [floatLabel]="'never'"
+                        class="app-toolbar--widget-container-search">
+          <mat-label>{{ 'App.Search movies' }}</mat-label>
+          <mat-icon class="app-toolbar--widget-container-search-icon" matPrefix>search</mat-icon>
+          <input
+            matInput
+            #search
+            (keyup.enter)="searchMovie(search.value); search.value = ''"
+            (keyup.enter)="closeSidenav()"
+            tabindex="-1"
+          />
+        </mat-form-field>
+        <a
+          *ngIf="(authState.accountId$ | async) !== true"
+          mat-icon-button
+          title="sign in"
+          (click)="authEffects.approveRequestToken()"
+        >
+          <mat-icon>input</mat-icon>
+        </a>
+        <a mat-icon-button
+           title="sign out"
+           *ngIf="authState.accountId$ | async"
+           (click)="onSignOut()">
+          <mat-icon>logout</mat-icon>
+        </a>
+        <a mat-icon-button
+           *ngIf="authState.accountId$ | async"
+           (click)="onSignOut()">
+          <mat-icon>logout</mat-icon>
+        </a>
+      </div>
+    </div>
     <ng-content></ng-content>
-  </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>
 <div id="btn-returnToTop">
   <button mat-mini-fab color="primary" (click)="scrollTop()">
