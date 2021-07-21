@@ -70,16 +70,6 @@
           >
         </li>
 
-        <li *ngIf="authState.accountId$ | async">
-          <a
-            routerLink="/account"
-            routerLinkActive="active"
-            (click)="closeSidenav()"
-          >
-            <mat-icon>account_box</mat-icon>
-            Account
-          </a>
-        </li>
         <li [hidden]="authState.accountId$ | async">
           <a
             routerLink="/sign-in"
