@@ -6,7 +6,7 @@
     [fixedInViewport]="mobileQuery.matches"
   >
     <nav class="navigation">
-      <a class="navigation--header">
+      <a class="navigation--header" *ngIf="!mobileQuery.matches">
         <picture>
           <img class="logo-img" src="/assets/svgs/logo.svg" title="HubMovies" alt="HubMovies" width="150" height="150"
                loading="lazy">
@@ -68,10 +68,9 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="app-toolbar">
-      <button class="app-toolbar--action" mat-icon-button (click)="snav.toggle()"
+      <app-hamburger-button class="app-toolbar--action" (click)="snav.toggle()"
               *ngIf="mobileQuery.matches">
-        <mat-icon>menu</mat-icon>
-      </button>
+      </app-hamburger-button>
       <div class="app-toolbar--widget-container">
         <mat-form-field appearance="filled"
                         [floatLabel]="'never'"
