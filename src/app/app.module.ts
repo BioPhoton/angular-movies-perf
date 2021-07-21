@@ -5,10 +5,7 @@ import {
   HAMMER_GESTURE_CONFIG,
   HammerGestureConfig,
 } from '@angular/platform-browser';
-import {
-  BrowserAnimationsModule,
-  NoopAnimationsModule,
-} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { environment } from '../environments/environment';
@@ -18,7 +15,7 @@ import { AppComponent } from './app.component';
 import { AppShellModule } from './app-shell/app-shell.module';
 import { MoviesRoutedModule } from './movies/container/movies.routed.module';
 import { httpInterceptorProviders } from './shared/service/tmdb/http-interceptor.providers';
-import {StarRatingModule} from './shared/component/star-rating/star-rating.module';
+import { StarRatingModule } from './shared/component/star-rating/star-rating.module';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -40,14 +37,13 @@ export class MyHammerConfig extends HammerGestureConfig {
     MoviesRoutedModule,
     AppShellModule,
     AppRoutingModule,
-    StarRatingModule
+    StarRatingModule,
   ],
   providers: [
     httpInterceptorProviders,
-    {provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig},
+    { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
     StorageService,
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
