@@ -9,15 +9,20 @@ interface Movie extends MovieModel {
 @Component({
   selector: 'app-movie-list',
   template: `
-    <h2 *ngIf="!dataParam">{{ title }}</h2>
-    <h2 *ngIf="dataParam">{{ dataParam }}</h2>
-    <div class="items" *ngIf="movies && movies.length > 0; else noData">
-      <div
-        class="item"
+    <div class="header">
+      <h1 class="title" *ngIf="!dataParam">{{ title }}</h1>
+      <h2 class="subtitle" *ngIf="dataParam">{{ dataParam }}</h2>
+    </div>
+    <div
+      class="movies-list--grid"
+      *ngIf="movies && movies.length > 0; else noData"
+    >
+      <a
+        class="movies-list--grid-item"
         *ngFor="let movie of movies; trackBy: movieById"
         [routerLink]="['/movie', movie.id]"
       >
-        <div class="aspect-ratio-box">
+        <div class="movies-list--grid-item-image">
           <img
             [defaultImage]="'assets/images/no_poster_available.jpg'"
             [lazyLoad]="
@@ -32,11 +37,13 @@ interface Movie extends MovieModel {
             [title]="movie.title"
           />
         </div>
-        <div class="details-panel-wrapper">
-          <h3 class="poster-title">{{ movie.title }}</h3>
+        <div class="movies-list--grid-item__details">
+          <h3 class="movies-list--grid-item__details-title">
+            {{ movie.title }}
+          </h3>
           <star-rating [rating]="movie.vote_average"></star-rating>
         </div>
-      </div>
+      </a>
     </div>
     <ng-template #noData>
       <h3>
@@ -68,7 +75,7 @@ export class MovieListComponent {
 
   constructor() {}
 
-  movieById(movie: MovieModel) {
+  movieById(idx: number, movie: MovieModel) {
     return movie.id;
   }
 

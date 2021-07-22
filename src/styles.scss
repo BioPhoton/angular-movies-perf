@@ -116,48 +116,6 @@ li {
   }
 }
 
-/* Column Flex */
-.items {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 25rem));
-  grid-gap: 4rem 2rem;
-
-  .item {
-    display: flex;
-    align-items: stretch;
-    flex-direction: column;
-
-    .aspect-ratio-box {
-      img {
-        width: 100%;
-        height: auto;
-      }
-    }
-
-    .details-panel-wrapper {
-      .poster-title {
-        text-align: center;
-        font-size: 1.5rem;
-        font-weight: 400;
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 1rem;
-        line-height: 1.4;
-      }
-    }
-
-    &:hover {
-      transform: scale(1.03);
-
-      .details-panel-wrapper {
-        color: rgb(255, 255, 255);
-        background-color: rgb(66, 66, 66);
-        box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
-          0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
-      }
-    }
-  }
-}
-
 /* Pagination */
 .pagination {
   ul {

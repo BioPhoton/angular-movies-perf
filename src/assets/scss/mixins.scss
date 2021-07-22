@@ -9,3 +9,9 @@
     @content;
   }
 }
+
+@mixin isLargeDesktop {
+  @media screen and (min-width: 1298px) {
+    @content;
+  }
+}
