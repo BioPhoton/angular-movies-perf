@@ -44,7 +44,9 @@ interface Movie extends MovieModel {
           <star-rating [rating]="movie.vote_average"></star-rating>
         </div>
       </a>
+      <div cass="pagination"></div>
     </div>
+
     <ng-template #noData>
       <h3>
         No results
