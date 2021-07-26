@@ -5,7 +5,6 @@ import { MoviesComponent } from './movies.component';
 import { MovieListModule } from '../movie-list/movie-list.module';
 import { PaginationModule } from '../../shared/component/pagination/pagination.module';
 import { ShareModalModule } from '../../shared/component/share-modal/share-modal.module';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [MoviesComponent],
@@ -15,7 +14,6 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     MovieListModule,
     PaginationModule,
     ShareModalModule,
-    LazyLoadImageModule,
   ],
   exports: [MoviesComponent],
 })

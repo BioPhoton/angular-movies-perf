@@ -28,7 +28,7 @@ export class MyHammerConfig extends HammerGestureConfig {
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     HttpClientModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {
@@ -44,6 +44,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
     StorageService,
   ],
+  exports: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
