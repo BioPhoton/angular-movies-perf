@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  baseUrl: '',
   tmdbBaseUrl: 'https://api.themoviedb.org',
   tmdbApiVersion: '3',
   tmdbApiNewVersion: '4',
