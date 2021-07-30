@@ -37,7 +37,7 @@ export function isAuthenticationInProgress({
   providedIn: 'root',
 })
 export class AuthStateService {
-  redirectUrl = `${environment.baseUrl}/movies/popular`;
+  redirectUrl = `${window.location.protocol}//${window.location.hostname}:${window.location.port}/movies/popular`;
   private localStorage = window.localStorage;
   state = new BehaviorSubject<Partial<AuthState>>({
     requestToken: this.localStorage.getItem('requestToken') || null,
