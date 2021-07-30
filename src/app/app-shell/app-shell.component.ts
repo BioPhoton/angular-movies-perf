@@ -34,7 +34,7 @@ export class AppShellComponent implements OnInit, OnDestroy {
   lang: string;
   // tslint:disable-next-line: variable-name
   private _mobileQueryListener: () => void;
-  @ViewChild('snav', { static: true }) snav: any;
+  @ViewChild('snav') snav: any;
 
   readonly viewState$ = this.state.select();
 
