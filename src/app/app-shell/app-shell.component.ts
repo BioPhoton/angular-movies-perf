@@ -42,6 +42,7 @@ export class AppShellComponent implements OnInit, OnDestroy {
     private state: RxState<{
       activeRoute: string;
       isMobile: boolean;
+      loggedIn: boolean;
     }>,
     public tmdbState: StateService,
     public authState: AuthStateService,
@@ -52,6 +53,10 @@ export class AppShellComponent implements OnInit, OnDestroy {
     private snackbar: MatSnackBar
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 1299px)');
+    this.state.connect(
+      'loggedIn',
+      this.authState.accountId$.pipe(map((id) => !!id))
+    );
     this.state.connect(
       'isMobile',
       fromEvent(this.mobileQuery, 'change').pipe(
@@ -83,7 +88,7 @@ export class AppShellComponent implements OnInit, OnDestroy {
 
   searchMovie(term: string) {
     term === ''
-      ? this.router.navigate(['/movies/now-playing'])
+      ? this.router.navigate(['/movies/popular'])
       : this.router.navigate(['/movies/search', { term }]);
   }
 
@@ -92,7 +97,7 @@ export class AppShellComponent implements OnInit, OnDestroy {
 
     this.snackbar.open('Goodbye', '', { duration: 2000 });
 
-    this.router.navigate(['/movies/now-playing']);
+    this.router.navigate(['/movies/popular']);
   }
 
   navTo(path: string, args: any) {

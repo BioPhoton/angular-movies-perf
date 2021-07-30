@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { ActivatedRoute, Params } from '@angular/router';
-import { EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import {
+  catchError,
   filter,
   map,
   startWith,
@@ -37,7 +38,11 @@ export class MoviesComponent {
             loading: false,
             movies: data.results,
             title: category,
-          }))
+          })),
+          catchError((e) => {
+            console.error(e);
+            return of({ loading: false, movies: null, title: null });
+          })
         );
       }
       if (genre) {
@@ -51,7 +56,11 @@ export class MoviesComponent {
             loading: false,
             movies: data.results,
             title: genres?.find((g) => g.id === genreId)?.name,
-          }))
+          })),
+          catchError((e) => {
+            console.error(e);
+            return of({ loading: false, movies: null, title: null });
+          })
         );
       }
       return EMPTY;
