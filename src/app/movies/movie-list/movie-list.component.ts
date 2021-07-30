@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MovieModel } from '../model';
 import { W342H513 } from '../../shared/utils/image-sizes';
 
@@ -72,7 +72,7 @@ export class MovieListComponent {
   @Input() lang: string;
   @Input() dataParam: string;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router) {}
 
   movieById(idx: number, movie: MovieModel) {
     return movie.id;
