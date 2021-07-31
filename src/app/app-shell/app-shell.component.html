@@ -51,9 +51,9 @@
         </div>
       </a>
       <h2 class="navigation--headline">Genres</h2>
-      <ng-container *rxLet="[]">
+      <ng-container *rxLet="genres$; let genres">
         <a
-          *ngFor="let genre of genres$ | async; trackBy: trackByGenre"
+          *ngFor="let genre of genres; trackBy: trackByGenre"
           class="navigation--link"
           [class.active]="vs.activeRoute === '/genre/' + genre.id"
           (click)="navTo('/genre', genre.id)"

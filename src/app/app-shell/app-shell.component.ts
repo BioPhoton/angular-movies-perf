@@ -68,7 +68,7 @@ export class AppShellComponent implements OnInit, OnDestroy {
       'activeRoute',
       this.router.events.pipe(
         filter<NavigationEnd>((e) => e instanceof NavigationEnd),
-        map((e) => e.url)
+        map((e) => e.urlAfterRedirects.split('?')[0])
       )
     );
   }
