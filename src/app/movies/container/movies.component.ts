@@ -25,18 +25,6 @@ type MoviesState = {
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styles: [
-    `
-      .loading-shade {
-        display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-        height: auto;
-        padding: 2rem;
-      }
-    `,
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MoviesComponent {
@@ -63,9 +51,6 @@ export class MoviesComponent {
         const genreId = parseInt(genre, 10);
         return this.tmdb2Service.getMovieGenre(genre).pipe(
           withLatestFrom(this.tmdbState.genres$.pipe(filter((g) => g != null))),
-          tap(([data, genres]) => {
-            console.log(data);
-          }),
           map(([data, genres]) => ({
             loading: false,
             movies: data.results,
@@ -75,8 +60,7 @@ export class MoviesComponent {
         );
       }
       return EMPTY;
-    }),
-    tap(console.log)
+    })
   );
 
   currentPage: number;
