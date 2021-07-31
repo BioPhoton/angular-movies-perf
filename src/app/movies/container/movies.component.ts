@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { ActivatedRoute, Params } from '@angular/router';
-import { EMPTY, Observable, of } from 'rxjs';
+import { EMPTY, MonoTypeOperatorFunction, Observable, of } from 'rxjs';
 import {
   catchError,
   filter,
@@ -16,10 +16,27 @@ import { StateService } from '../../shared/service/state.service';
 import { Tmdb2Service } from '../../shared/service/tmdb/tmdb2.service';
 import { MovieModel } from '../model/movie.model';
 
+type MoviesState = {
+  loading: boolean;
+  movies: MovieModel[] | null;
+  title: string | null;
+};
+
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styles: [``],
+  styles: [
+    `
+      .loading-shade {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        padding: 2rem;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MoviesComponent {
@@ -39,10 +56,7 @@ export class MoviesComponent {
             movies: data.results,
             title: category,
           })),
-          catchError((e) => {
-            console.error(e);
-            return of({ loading: false, movies: null, title: null });
-          })
+          moviesState()
         );
       }
       if (genre) {
@@ -57,15 +71,12 @@ export class MoviesComponent {
             movies: data.results,
             title: genres?.find((g) => g.id === genreId)?.name,
           })),
-          catchError((e) => {
-            console.error(e);
-            return of({ loading: false, movies: null, title: null });
-          })
+          moviesState()
         );
       }
       return EMPTY;
     }),
-    startWith({ loading: true, movies: null, title: null })
+    tap(console.log)
   );
 
   currentPage: number;
@@ -80,4 +91,15 @@ export class MoviesComponent {
     private tmdbState: StateService,
     private route: ActivatedRoute
   ) {}
+}
+
+function moviesState(): MonoTypeOperatorFunction<MoviesState> {
+  return (o$) =>
+    o$.pipe(
+      catchError((e) => {
+        console.error(e);
+        return of({ loading: false, movies: null, title: null });
+      }),
+      startWith({ loading: true, movies: null, title: null })
+    );
 }

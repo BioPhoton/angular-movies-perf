@@ -7,8 +7,6 @@
   >
   </app-movie-list>
   <ng-template #loading>
-    <div class="loading-shade" *ngIf="vm.loading">
-      <mat-spinner mode="indeterminate" [diameter]="50"></mat-spinner>
-    </div>
+    <app-loader></app-loader>
   </ng-template>
 </ng-container>
