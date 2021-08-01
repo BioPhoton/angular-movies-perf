@@ -12,12 +12,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NavigationEnd, Router } from '@angular/router';
 import { fromEvent } from '@rx-angular/cdk';
 import { RxState } from '@rx-angular/state';
-import { pipe } from 'rxjs';
 import { filter, map, startWith } from 'rxjs/operators';
 import { AuthStateService } from '../auth/auth.state';
 import { TmdbAuthEffects } from '../auth/tmdbAuth.effects';
 import { StateService } from '../shared/service/state.service';
 import { MovieGenreModel } from '../movies/model';
+import { Platform } from '@angular/cdk/platform';
 
 @Component({
   selector: 'app-shell',

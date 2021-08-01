@@ -3,6 +3,7 @@ import 'zone.js/dist/zone-node';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
 import { join } from 'path';
+import * as compressionModule from 'compression';
 
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
@@ -12,13 +13,19 @@ const domino = require('domino');
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
-  console.log('!!!!!!!');
   const server = express();
-  const distFolder = join(process.cwd(), 'dist/hub-movies/browser');
+
+  const distFolder = join(process.cwd(), 'dist/hub-movies');
   const indexHtml = existsSync(join(distFolder, 'index.original.html'))
     ? 'index.original.html'
     : 'index';
+
   patchWindow(indexHtml);
+
+  // **🚀 Perf Tip:**
+  // Serve gzip for faster load
+  server.use(compressionModule());
+
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine(
     'html',
@@ -42,6 +49,8 @@ export function app(): express.Express {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
+    // return rendered HTML uncluding Angular generated DOM
+    console.log('GET SSR ROUTE');
     res.render(indexHtml, {
       req,
       providers: [
@@ -71,30 +80,15 @@ function patchWindow(template: string): void {
   win.Object = Object;
   win.Math = Math;
 
-  (global as any).window = win;
-  (global as any).document = win.document;
-  (global as any).branch = null;
-  (global as any).object = win.object;
-
-  (global as any).window.requestAnimationFrame = (callback, element) => {
-    let lastTime = 0;
-    const currTime = new Date().getTime();
-    const timeToCall = Math.max(0, 16 - (currTime - lastTime));
-    const id = setTimeout(() => callback(currTime + timeToCall), timeToCall);
-    lastTime = currTime + timeToCall;
-    return id;
-  };
-
-  (global as any).window.cancelAnimationFrame = (id) => {
-    clearTimeout(id);
-  };
-
-  (global as any).window.localStorage = {
+  win.localStorage = {
     getItem: (prop: string): undefined => undefined,
     setItem: (prop: string, value: any) => void 0,
   };
 
-  console.log('patched window');
+  (global as any).window = win;
+  (global as any).document = win.document;
+  (global as any).branch = null;
+  (global as any).object = win.object;
 }
 
 // Webpack will replace 'require' with '__webpack_require__'
