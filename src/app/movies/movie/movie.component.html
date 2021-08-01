@@ -1,8 +1,8 @@
 <div class="movie-detail--grid" *rxLet="detailState$; let vs">
   <ng-container *ngIf="!vs.loading; else loading">
-    <div class="movie-detail--grid-item">
+    <div class="movie-detail--grid-item gradient">
       <img
-        class="artwork"
+        class="movie-poster"
         [src]="
           'https://image.tmdb.org/t/p/w' +
           W342H513.WIDTH +
@@ -17,29 +17,31 @@
     </div>
     <div class="movie-detail--grid-item">
       <div class="movie-detail--summary">
-        <h1 class="movie-detail--title">{{ vs.movie.title }}</h1>
-        <h2 class="movie-detail--subtitle">{{ vs.movie.tagline }}</h2>
+        <div class="header">
+          <h1 class="title">{{ vs.movie.title }}</h1>
+          <h2 class="subtitle">{{ vs.movie.tagline }}</h2>
+        </div>
         <div class="movie-detail--basic-infos">
-          <div class="movie-detail--rating">
-            <star-rating
-              [rating]="vs.movie.vote_average"
-              [showRating]="true"
-            ></star-rating>
-          </div>
+          <star-rating
+            [rating]="vs.movie.vote_average"
+            [showRating]="true"
+          ></star-rating>
           <div class="movie-detail--languages-runtime-release">
             {{ vs.movie.languages_runtime_release }}
           </div>
         </div>
         <div class="movie-detail--section">
           <h3 class="section-heading">The Genres</h3>
-          <a
-            class="genre-link"
-            *ngFor="let genre of vs.movie.genres; trackBy: trackByGenre"
-            (click)="toGenre(genre)"
-          >
-            <mat-icon> radio_button_checked </mat-icon>
-            {{ genre.name }}
-          </a>
+          <div class="movie-detail--genres">
+            <a
+              class="movie-detail--genres-link"
+              *ngFor="let genre of vs.movie.genres; trackBy: trackByGenre"
+              (click)="toGenre(genre)"
+            >
+              <mat-icon> radio_button_checked </mat-icon>
+              {{ genre.name }}
+            </a>
+          </div>
         </div>
         <div class="movie-detail--section">
           <h3 class="section-heading">The Synopsis</h3>
@@ -47,7 +49,7 @@
             {{ vs.movie.overview || 'There is no synopsis available...' }}
           </p>
         </div>
-        <div class="movie-detail--section">
+        <div class="movie-detail--cast">
           <h3 class="section-heading">The Cast</h3>
           <div class="movie-detail--cast-list">
             <a
@@ -67,19 +69,21 @@
             </a>
           </div>
         </div>
-        <div class="movie-detail--section">
-          <a class="btn" target="_blank" [href]="vs.movie.homepage">
-            Website
-            <mat-icon> link </mat-icon>
-          </a>
-          <a class="btn" target="_blank" [href]="vs.movie.imdb_id">
-            IMDB
-            <mat-icon> radio_button_checked </mat-icon>
-          </a>
-          <button class="btn" type="button" *ngIf="vs.movie.video">
-            {{ vs.movie.video }}
-            <mat-icon> movie </mat-icon>
-          </button>
+        <div class="movie-detail--ad-section">
+          <div class="movie-detail--ad-section-links">
+            <a class="btn" target="_blank" [href]="vs.movie.homepage">
+              Website
+              <mat-icon> link </mat-icon>
+            </a>
+            <a class="btn" target="_blank" [href]="vs.movie.imdb_id">
+              IMDB
+              <mat-icon> radio_button_checked </mat-icon>
+            </a>
+            <button class="btn" type="button" *ngIf="vs.movie.video">
+              {{ vs.movie.video }}
+              <mat-icon> movie </mat-icon>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -88,7 +92,10 @@
     <app-loader></app-loader>
   </ng-template>
 </div>
-<div class="movie-detail--recommended" *rxLet="recommendedState$; let vs">
+<div
+  class="padding-wrapper movie-detail--recommended"
+  *rxLet="recommendedState$; let vs"
+>
   <app-movie-list
     *ngIf="!vs.loading"
     [movies]="vs.recommendations"

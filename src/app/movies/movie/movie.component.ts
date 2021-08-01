@@ -17,7 +17,7 @@ import {
 } from '../model';
 import { Tmdb2Service } from '../../shared/service/tmdb/tmdb2.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { W342H513 } from '../../shared/utils/image-sizes';
+import { W342H513, W780H1170 } from '../../shared/utils/image-sizes';
 
 type MovieDetail = MovieDetailsModel & { languages_runtime_release: string };
 
@@ -29,7 +29,7 @@ type MovieDetail = MovieDetailsModel & { languages_runtime_release: string };
   providers: [RxState],
 })
 export class MovieComponent {
-  W342H513 = W342H513;
+  W342H513 = W780H1170;
   readonly detailState$ = this.state.select(
     selectSlice(['loading', 'movie', 'cast'])
   );
