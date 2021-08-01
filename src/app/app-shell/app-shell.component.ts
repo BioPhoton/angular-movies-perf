@@ -80,12 +80,6 @@ export class AppShellComponent implements OnInit, OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  /*@HostListener('window:scroll', ['$event']) scrollHandler(event) {
-    const height = window.scrollY;
-    const el = document.getElementById('btn-returnToTop');
-    height >= 500 ? (el.className = 'show') : (el.className = 'hide');
-  }*/
-
   searchMovie(term: string) {
     term === ''
       ? this.router.navigate(['/movies/popular'])

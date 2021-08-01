@@ -1,18 +1,9 @@
 <div class="movie-detail--grid">
   <div class="movie-detail--grid-item">
-    <img
-      class="artwork"
-      [src]="
-        'https://image.tmdb.org/t/p/w' +
-        W342H513.WIDTH +
-        '/' +
-        movie.poster_path
-      "
-      [width]="W342H513.WIDTH"
-      [height]="W342H513.HEIGHT"
-      alt="poster movie"
-      [title]="movie.title"
-    />
+    <img class="artwork" [src]=" loading="lazy" [src]="
+    'https://image.tmdb.org/t/p/w' + W342H513.WIDTH + '/' + movie.poster_path "
+    [width]="W342H513.WIDTH" [height]="W342H513.HEIGHT" alt="poster movie"
+    [title]="movie.title" />
   </div>
   <div class="movie-detail--grid-item">
     <div class="movie-detail--summary">

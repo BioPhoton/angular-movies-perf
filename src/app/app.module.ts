@@ -16,7 +16,7 @@ import { StarRatingModule } from './shared/component/star-rating/star-rating.mod
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     HttpClientModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {
