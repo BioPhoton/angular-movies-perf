@@ -1,84 +1,97 @@
-<div class="movie-detail--grid">
-  <div class="movie-detail--grid-item">
-    <img
-      class="artwork"
-      [src]="
-        'https://image.tmdb.org/t/p/w' +
-        W342H513.WIDTH +
-        '/' +
-        movie.poster_path
-      "
-      [width]="W342H513.WIDTH"
-      [height]="W342H513.HEIGHT"
-      alt="poster movie"
-      [title]="movie.title"
-    />
-  </div>
-  <div class="movie-detail--grid-item">
-    <div class="movie-detail--summary">
-      <h1 class="movie-detail--title">{{ movie.title }}</h1>
-      <h2 class="movie-detail--subtitle">{{ movie.tagline }}</h2>
-      <div class="movie-detail--basic-infos">
-        <div class="movie-detail--rating">
-          <star-rating
-            [rating]="movie.vote_average"
-            [showRating]="true"
-          ></star-rating>
+<div class="movie-detail--grid" *rxLet="detailState$; let vs">
+  <ng-container *ngIf="!vs.loading; else loading">
+    <div class="movie-detail--grid-item">
+      <img
+        class="artwork"
+        [src]="
+          'https://image.tmdb.org/t/p/w' +
+          W342H513.WIDTH +
+          '/' +
+          vs.movie.poster_path
+        "
+        [width]="W342H513.WIDTH"
+        [height]="W342H513.HEIGHT"
+        alt="poster movie"
+        [title]="vs.movie.title"
+      />
+    </div>
+    <div class="movie-detail--grid-item">
+      <div class="movie-detail--summary">
+        <h1 class="movie-detail--title">{{ vs.movie.title }}</h1>
+        <h2 class="movie-detail--subtitle">{{ vs.movie.tagline }}</h2>
+        <div class="movie-detail--basic-infos">
+          <div class="movie-detail--rating">
+            <star-rating
+              [rating]="vs.movie.vote_average"
+              [showRating]="true"
+            ></star-rating>
+          </div>
+          <div class="movie-detail--languages-runtime-release">
+            {{ vs.movie.languages_runtime_release }}
+          </div>
         </div>
-        <div class="movie-detail--languages-runtime-release">
-          {{ movie.languages_runtime_release }}
-        </div>
-      </div>
-      <div class="movie-detail--section">
-        <h3 class="section-heading">The Genres</h3>
-        <a
-          class="genre-link"
-          *ngFor="let genre of movie.genres; trackBy: trackByGenre"
-          [routerLink]="genre.id"
-        >
-          <mat-icon> radio_button_checked </mat-icon>
-          {{ genre.name }}
-        </a>
-      </div>
-      <div class="movie-detail--section">
-        <h3 class="section-heading">The Synopsis</h3>
-        <p class="section-text">
-          {{ movie.overview || 'There is no synopsis available...' }}
-        </p>
-      </div>
-      <div class="movie-detail--section">
-        <h3 class="section-heading">The Cast</h3>
-        <div class="movie-detail--cast-list">
-          <a *ngFor="let c of cast; trackBy: trackByCast">
-            <img
-              [defaultImage]="'assets/images/no_poster_available.jpg'"
-              [lazyLoad]="'https://image.tmdb.org/t/p/w185' + c?.profile_path"
-              alt="poster movie"
-              [title]="movie.title"
-            />
+        <div class="movie-detail--section">
+          <h3 class="section-heading">The Genres</h3>
+          <a
+            class="genre-link"
+            *ngFor="let genre of vs.movie.genres; trackBy: trackByGenre"
+            (click)="toGenre(genre)"
+          >
+            <mat-icon> radio_button_checked </mat-icon>
+            {{ genre.name }}
           </a>
         </div>
-      </div>
-      <div class="movie-detail--section">
-        <a class="btn" href="movie.homepage">
-          Website
-          <mat-icon> link </mat-icon>
-        </a>
-        <a class="btn" href="movie.imdb_id">
-          IMDB
-          <mat-icon> radio_button_checked </mat-icon>
-        </a>
-        <button class="btn" type="button" *ngIf="movie.video">
-          {{ movie.video }}
-          <mat-icon> movie </mat-icon>
-        </button>
+        <div class="movie-detail--section">
+          <h3 class="section-heading">The Synopsis</h3>
+          <p class="section-text">
+            {{ vs.movie.overview || 'There is no synopsis available...' }}
+          </p>
+        </div>
+        <div class="movie-detail--section">
+          <h3 class="section-heading">The Cast</h3>
+          <div class="movie-detail--cast-list">
+            <a
+              *ngFor="let c of vs.cast; trackBy: trackByCast"
+              class="movie-detail--cast-actor"
+            >
+              <img
+                loading="lazy"
+                [src]="
+                  c?.profile_path
+                    ? 'https://image.tmdb.org/t/p/w185' + c?.profile_path
+                    : 'assets/images/no_poster_available.jpg'
+                "
+                [alt]="c.name"
+                [title]="c.name"
+              />
+            </a>
+          </div>
+        </div>
+        <div class="movie-detail--section">
+          <a class="btn" target="_blank" [href]="vs.movie.homepage">
+            Website
+            <mat-icon> link </mat-icon>
+          </a>
+          <a class="btn" target="_blank" [href]="vs.movie.imdb_id">
+            IMDB
+            <mat-icon> radio_button_checked </mat-icon>
+          </a>
+          <button class="btn" type="button" *ngIf="vs.movie.video">
+            {{ vs.movie.video }}
+            <mat-icon> movie </mat-icon>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
 </div>
-<div class="movie-detail--recommended">
+<div class="movie-detail--recommended" *rxLet="recommendedState$; let vs">
   <app-movie-list
-    [movies]="recommendations"
+    *ngIf="!vs.loading"
+    [movies]="vs.recommendations"
     [title]="'Recommended'"
     [dataParam]="'Movies'"
   >

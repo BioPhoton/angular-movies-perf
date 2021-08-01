@@ -79,7 +79,7 @@ export class MovieListComponent {
   }
 
   toMovie(movie: MovieModel) {
-    this.router.navigate(['movie', movie.id]);
+    this.router.navigate(['/movie', movie.id]);
   }
 
   addMovie(movie: any) {}
