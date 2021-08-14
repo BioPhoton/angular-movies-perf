@@ -56,7 +56,7 @@
  * Zone JS is required by default for Angular itself.
  */
 // **🚀 Perf Tip:**
-// Remove `zone.js` import to save segnificant bundle size and bootstrap time
+// Remove `zone.js` import to save significant bundle size and bootstrap time
 // import 'zone.js'; // Included with Angular CLI.
 
 /***************************************************************************************************
