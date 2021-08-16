@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
   templateUrl: './search-icon.component.svg',
   styles: [
     `
-      :host {
+      svg {
         fill: currentColor;
         width: 1.125em;
       }

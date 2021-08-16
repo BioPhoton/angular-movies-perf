@@ -7,6 +7,7 @@ import {
   NgModule,
   OnDestroy,
   OnInit,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { LetModule } from '@rx-angular/template';
@@ -142,6 +143,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     return this.inputRef.nativeElement;
   }
 
+  @Output() search = new Subject<string>();
+
   private searchTerm = '';
 
   private readonly nativeElement: HTMLElement = this.elementRef.nativeElement;
@@ -184,6 +187,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       return;
     }
     this.setOpened(false);
+    this.search.next(this.searchTerm);
+    this.input.value = '';
   }
 
   onInputChange(value: string) {
