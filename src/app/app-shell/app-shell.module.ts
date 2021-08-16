@@ -23,7 +23,6 @@ import { DarkModeToggleModule } from '../shared/component/dark-mode-toggle/dark-
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
-    MatFormFieldModule,
     FormsModule,
     RouterModule,
     MatButtonModule,
