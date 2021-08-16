@@ -10,7 +10,6 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { LetModule } from '@rx-angular/template';
 import { fromEvent, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SearchIconComponentModule } from '../icons/search/search-icon.component';
@@ -199,6 +198,6 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 @NgModule({
   declarations: [SearchBarComponent],
   exports: [SearchBarComponent],
-  imports: [SearchIconComponentModule, LetModule],
+  imports: [SearchIconComponentModule],
 })
 export class SearchBarComponentModule {}
