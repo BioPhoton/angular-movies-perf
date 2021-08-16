@@ -44,6 +44,11 @@ app-side-drawer {
 .content-wrapper {
   grid-area: content;
 }
+@include isMobile {
+  .content-wrapper {
+    padding-top: 72px;
+  }
+}
 .content {
   min-height: calc(100vh - 72px);
   width: 100%;
