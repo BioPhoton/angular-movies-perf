@@ -5,8 +5,8 @@ import {
   TrackByFunction,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { map, startWith, switchMap } from 'rxjs';
 import { RxState, selectSlice } from '@rx-angular/state';
-import { map, startWith, switchMap, tap } from 'rxjs/operators';
 import {
   MovieCastModel,
   MovieDetailsModel,
@@ -29,8 +29,7 @@ type MovieDetail = MovieDetailsModel & { languages_runtime_release: string };
 export class MovieComponent {
   W342H513 = W780H1170;
   readonly detailState$ = this.state.select(
-    selectSlice(['loading', 'movie', 'cast']),
-    tap(console.log)
+    selectSlice(['loading', 'movie', 'cast'])
   );
   readonly recommendedState$ = this.state.select(
     selectSlice(['loading', 'recommendations'])

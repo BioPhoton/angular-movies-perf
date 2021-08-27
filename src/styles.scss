@@ -338,3 +338,19 @@ body.dark img:not([src*='.svg']) {
   height: 30px;
   width: 30px;
 }
+
+body.light .dark-mode-toggle > button.light {
+  color: #ffb74d;
+}
+
+body.light .dark-mode-toggle > button.dark {
+  color: #666;
+}
+
+body.dark .dark-mode-toggle > button.light {
+  color: #999;
+}
+
+body.dark .dark-mode-toggle button.dark {
+  color: lightblue;
+}
