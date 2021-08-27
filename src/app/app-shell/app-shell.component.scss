@@ -33,6 +33,7 @@
       color: var(--palette-secondary-main);
       &:not(:first-child) {
         margin-left: 12px;
+        margin-right: 12px;
       }
     }
   }
@@ -95,10 +96,6 @@ app-side-drawer {
       width: 180px;
       padding: 0 20px;
       font-size: 13px;
-    }
-
-    .mat-icon {
-      height: 1.75rem;
     }
   }
 

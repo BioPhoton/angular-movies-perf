@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoaderComponentModule } from '../../shared/component/loader/loader.component';
 import { MoviesComponent } from './movies.component';
 import { MovieListModule } from '../movie-list/movie-list.module';
-import { PaginationModule } from '../../shared/component/pagination/pagination.module';
 import { LetModule } from '@rx-angular/template/let';
 
 const ROUTES: Routes = [{ path: '', component: MoviesComponent }];
@@ -15,7 +14,7 @@ const ROUTES: Routes = [{ path: '', component: MoviesComponent }];
     CommonModule,
     RouterModule.forChild(ROUTES),
     MovieListModule,
-    PaginationModule,
+    // PaginationModule,
     LetModule,
     LoaderComponentModule,
   ],

@@ -4,7 +4,6 @@ import { HamburgerButtonModule } from '../shared/component/hamburger-button/hamb
 import { SearchBarComponentModule } from '../shared/component/search-bar/search-bar.component';
 import { SideDrawerComponentModule } from '../shared/component/side-drawer/side-drawer.component';
 import { AppShellComponent } from './app-shell.component';
-import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +14,6 @@ import { DarkModeToggleModule } from '../shared/component/dark-mode-toggle/dark-
   declarations: [AppShellComponent],
   imports: [
     CommonModule,
-    MatIconModule,
     MatSnackBarModule,
     FormsModule,
     RouterModule,
