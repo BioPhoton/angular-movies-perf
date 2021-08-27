@@ -6,6 +6,7 @@
   align-items: start;
   margin: 4rem 0;
   position: relative;
+  contain: layout;
 
   @media only screen and (max-width: 600px) {
     grid-template-columns: repeat(auto-fit, minmax(10rem, 23rem));
@@ -72,12 +73,6 @@
       &:after {
         transform: scale(1);
       }
-      /*.movies-list--grid-item__details {
-        color: rgb(255, 255, 255);
-        background-color: rgb(66, 66, 66);
-        box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
-          0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
-      }*/
     }
   }
 }
