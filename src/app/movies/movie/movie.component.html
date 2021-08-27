@@ -96,15 +96,6 @@
               IMDB
               <mat-icon>local_movies</mat-icon>
             </a>
-            <button
-              *ngIf="vs.movie?.videos?.results as videos"
-              class="btn"
-              type="button"
-              (click)="openTrailer(videos[0].key)"
-            >
-              Video
-              <mat-icon>movie</mat-icon>
-            </button>
           </div>
         </div>
       </div>
