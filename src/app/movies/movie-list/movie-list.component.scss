@@ -6,6 +6,17 @@
   align-items: start;
   margin: 4rem 0;
 
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 23rem));
+    justify-content: space-around;
+    gap: 4rem 1.5rem;
+  }
+
+  @media only screen and (max-width: 500px) {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 18rem));
+    gap: 4rem 1rem;
+  }
+
   &-item {
     display: flex;
     align-items: stretch;
@@ -26,6 +37,9 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.5rem 3rem;
+      @media only screen and (max-width: 500px) {
+        padding: 1.5rem;
+      }
 
       &-title {
         text-align: center;
