@@ -5,8 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LetModule } from '@rx-angular/template/let';
 import { LoaderComponentModule } from '../../shared/component/loader/loader.component';
 import { MovieComponent } from './movie.component';
-import { MovieTrailerModule } from './movie-trailer/movie-trailer.module';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -27,11 +25,9 @@ const ROUTES: Routes = [
     CommonModule,
     RouterModule.forChild(ROUTES),
     MatIconModule,
-    MatButtonModule,
     MatMenuModule,
     MatDialogModule,
     MatTabsModule,
-    MovieTrailerModule,
     StarRatingModule,
     MovieListModule,
     LetModule,
