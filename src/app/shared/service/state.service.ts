@@ -39,7 +39,6 @@ export class StateService {
   }
 
   private reduceSlice(slice: Partial<State>) {
-    console.log(slice);
     this.state.next({ ...this.state.getValue(), ...slice });
   }
 }

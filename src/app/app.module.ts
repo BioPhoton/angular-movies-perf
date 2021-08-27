@@ -5,6 +5,7 @@ import {
   BrowserTransferStateModule,
 } from '@angular/platform-browser';
 import { TransferHttpCacheModule } from '@nguniversal/common';
+import { RX_ANGULAR_CONFIG } from '@rx-angular/cdk';
 
 import { AppRoutingModule } from './app-routing.module';
 import { StorageService } from './shared/service/storage/storage.service';
@@ -14,6 +15,7 @@ import { httpInterceptorProviders } from './shared/service/tmdb/http-interceptor
 import { StarRatingModule } from './shared/component/star-rating/star-rating.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { customStrategyCredentials } from './shared/utils/custom-strategies';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +34,17 @@ import { environment } from '../environments/environment';
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
-  providers: [httpInterceptorProviders, StorageService],
+  providers: [
+    httpInterceptorProviders,
+    StorageService,
+    {
+      provide: RX_ANGULAR_CONFIG,
+      useValue: {
+        customStrategies: customStrategyCredentials,
+        patchZone: false,
+      },
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
