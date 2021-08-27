@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import {
   BrowserModule,
   BrowserTransferStateModule,
@@ -16,6 +16,13 @@ import { StarRatingModule } from './shared/component/star-rating/star-rating.mod
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { customStrategyCredentials } from './shared/utils/custom-strategies';
+import { StateService } from './shared/service/state.service';
+
+export function initializeState(state: StateService) {
+  return (): Promise<void> => {
+    return state.init();
+  };
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +44,12 @@ import { customStrategyCredentials } from './shared/utils/custom-strategies';
   providers: [
     httpInterceptorProviders,
     StorageService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeState,
+      deps: [StateService],
+      multi: true,
+    },
     {
       provide: RX_ANGULAR_CONFIG,
       useValue: {

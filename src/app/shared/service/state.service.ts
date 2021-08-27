@@ -29,9 +29,12 @@ export class StateService {
         exhaustMap(() => this.tmdb2Service.getGenres())
       )
       .subscribe((genres) => this.reduceSlice({ genres }));
+  }
 
+  init(): Promise<void> {
     // move into app initializer
     this.refreshGenres();
+    return Promise.resolve();
   }
 
   refreshGenres() {

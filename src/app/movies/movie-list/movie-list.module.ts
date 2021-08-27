@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { RxForModule } from '../../shared/directives/rx-for.directive';
 import { MovieListComponent } from './movie-list.component';
@@ -12,7 +11,6 @@ import { AspectRatioBoxModule } from '../../shared/component/aspect-ratio-box/as
   declarations: [MovieListComponent],
   imports: [
     CommonModule,
-    MatTooltipModule,
     StarRatingModule,
     RouterModule,
     LetModule,
